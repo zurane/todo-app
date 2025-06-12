@@ -1,38 +1,254 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+
+/* Styling rules */
+
+:root {
+  --primary-font: "Ubuntu", sans-serif !important;
+  --primary-background: #f2f3f6;
+}
+
+body {
+  font-family: var(--primary-font);
+  background: var(--primary-background);
+}
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.app-container {
+  background-color: #ffffff;
+  min-height: 80vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  padding: 50px 15px;
   font-size: calc(10px + 2vmin);
+  border: 1px solid #f2f2f2;
+  border-radius: 10px;
+  max-width: 500px;
+  margin: 15px auto;
+  position: relative;
+}
+
+/* TodoApp Component */
+
+.list-group ul {
+  margin: 0;
+  padding: 0;
+
+}
+
+.list-group p {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.task-list-item {
+  list-style: none;
+  font-size: 15px;
+}
+
+.btns button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  margin: 0px 2px;
+}
+
+.todo-content {
+  border: 1px solid #f5f5f5;
+  padding: 5px;
+  min-width: 360px;
+  border-radius: 3px;
+}
+
+.task-list-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.todo-item input[type="checkbox"] {
+  width: 1rem;
+  height: 1rem;
+  padding: 5px !important;
+}
+
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.counter {
+  position: fixed;
+  bottom: 30px;
+  right: 32%;
+  font-size: 18px;
+
+  padding: 5px;
+  /* width: 10px;
+  height: 10px; */
+  border-radius: 100%;
+  color: black;
+  display: inline-flex;
+  align-items: center;
+}
+
+.counter .badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: red;
+  color: #f2f2f2;
+  height: 16px;
+  width: 17px;
+  border-radius: 50px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title .info button{
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* AddTask component */
+
+.add-task {
+  margin-bottom: 15px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.input-wrapper {
+  border: 1px solid #f5f5f5;
+  border-radius: 3px;
+  display: inline-flex;
+  align-items: center;
+  width: 480px;
+  padding: 8px;
+}
+
+.input-wrapper input {
+  border: none;
+  padding: 7px;
+  width: 100%;
+  font-family: var(--primary-font);
+  font-size: 15px;
+}
+
+.input-wrapper input:focus {
+  outline: none;
+}
+
+.add-task button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.add-task button:hover {
+  background: #f2f3f6;
+  border-radius: 5px;
+}
+
+
+
+/* Popup component / modal */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Make sure it's on top of other elements */
+}
+
+.modal {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  position: relative;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.modal-body {
+  margin-bottom: 20px;
+}
+
+.modal-body input {
+  width: 95%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.modal-body input:focus {
+  outline: none;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.content {
+  font-size: 15px;
+  max-height: 60vh; 
+  overflow-y: auto;
+}
+
+
+.save-button {
+  background-color: #6cffb0;
   color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.save-button:hover {
+  background-color: #56cc8d;
 }
