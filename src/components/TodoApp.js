@@ -18,6 +18,7 @@ export default function TodoApp() {
     setIsInfoOpen(false);
   };
   const state = useSelector((state) => state.todo.todoList);
+  const completed = useSelector((state) => state.todo.completed);
   const dispatch = useDispatch();
   // Initialize a state to listen for the input value
   const [editingId, setEditingId] = useState(null);
@@ -68,7 +69,7 @@ export default function TodoApp() {
 
   return (
     <div className="list-group">
-      <span className="counter">
+      {/* <span className="counter">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           height="35px"
@@ -79,7 +80,7 @@ export default function TodoApp() {
           <path d="M421-324.92 677.08-581l-23.7-23.46L421-371.31 304.08-488.23l-22.7 23.46L421-324.92ZM480.13-120q-74.44 0-139.79-28.34t-114.48-77.42q-49.13-49.08-77.49-114.37Q120-405.42 120-479.87q0-74.67 28.34-140.41 28.34-65.73 77.42-114.36 49.08-48.63 114.37-76.99Q405.42-840 479.87-840q74.67 0 140.41 28.34 65.73 28.34 114.36 76.92 48.63 48.58 76.99 114.26Q840-554.81 840-480.13q0 74.44-28.34 139.79t-76.92 114.48q-48.58 49.13-114.26 77.49Q554.81-120 480.13-120Z" />
         </svg>
         <div className="badge">{state.length}</div>
-      </span>
+      </span> */}
       {/* Add task */}
       <div className="add-task">
         <div className="input-wrapper">
@@ -115,21 +116,10 @@ export default function TodoApp() {
 
       {/* Heading with a counter */}
       <div className="title">
-      <p>My current tasks</p>
-      <span className="info">
-       <button onClick={openInfo} title="User instructions">
-       <svg
-          xmlns="http://www.w3.org/2000/svg"
-          height="30px"
-          viewBox="0 -960 960 960"
-          width="30px"
-          fill="#77aaff"
-        >
-          <path d="M464.05-300h33.85v-220h-33.85v220Zm15.94-274.97q9.5 0 16.01-6.32 6.51-6.31 6.51-16.04 0-9.79-6.5-16.23-6.5-6.44-16-6.44-10.01 0-16.27 6.44-6.25 6.44-6.25 16.23 0 9.73 6.5 16.04 6.5 6.32 16 6.32Zm.32 454.97q-75.01 0-140.33-28.34-65.33-28.34-114.29-77.25-48.96-48.92-77.32-114.23Q120-405.14 120-480.2q0-74.55 28.34-140.18 28.34-65.63 77.25-114.26 48.92-48.63 114.23-76.99Q405.14-840 480.2-840q74.55 0 140.18 28.34 65.63 28.34 114.26 76.92 48.63 48.58 76.99 114.26Q840-554.81 840-480.31q0 75.01-28.34 140.33-28.34 65.33-76.92 114.16-48.58 48.84-114.26 77.33Q554.81-120 480.31-120Z" />
-        </svg>
-       </button>
-      </span>
+        <p>My current tasks</p>
+
       </div>
+
       <ul>
         {state.map((todo) => (
           <div className="todo-item todo-content" key={todo.id}>
@@ -153,6 +143,7 @@ export default function TodoApp() {
             {/* Action Buttons */}
             {!todo.isComplete && (
               <div className="btns">
+                {/* Edit button */}
                 <button onClick={() => setEditingId(todo.id)}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -164,6 +155,7 @@ export default function TodoApp() {
                     <path d="M224.62-160q-27.62 0-46.12-18.5Q160-197 160-224.62v-510.76q0-27.62 18.5-46.12Q197-800 224.62-800h335.46l-40 40H224.62q-9.24 0-16.93 7.69-7.69 7.69-7.69 16.93v510.76q0 9.24 7.69 16.93 7.69 7.69 16.93 7.69h510.76q9.24 0 16.93-7.69 7.69-7.69 7.69-16.93v-299.53l40-40v339.53q0 27.62-18.5 46.12Q763-160 735.38-160H224.62ZM480-480Zm-80 80v-104.62l357.77-357.76q6.61-6.62 13.92-9.16t15.39-2.54q7.54 0 14.73 2.54t13.04 8.39L859.31-820q6.38 6.62 9.69 14.58 3.31 7.96 3.31 16.04 0 8.07-2.43 15.26-2.42 7.2-9.03 13.81L500.77-400H400Zm432.54-388.62-44.46-46.76 44.46 46.76ZM440-440h43.69l266.62-266.62-21.85-21.84-24.38-23.39L440-487.77V-440Zm288.46-288.46-24.38-23.39 24.38 23.39 21.85 21.84-21.85-21.84Z" />
                   </svg>
                 </button>
+                {/* Delete button */}
                 <button onClick={() => dispatch(deleteTask({ id: todo.id }))}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -184,7 +176,6 @@ export default function TodoApp() {
         {/* Info modal pop up*/}
         {isInfoOpen && <Info close={closeInfo} />}
 
-
         {editingId !== null && (
           <EditNoteModal
             todo={state.find((todo) => todo.id === editingId)}
@@ -193,9 +184,19 @@ export default function TodoApp() {
               dispatch(editTask({ id: editingId, newTaskContent }));
               setEditingId(null);
             }}
-          />
+          />  
         )}
       </ul>
+
+      <div>
+        <p>Completed Tasks:</p>
+        {JSON.parse(localStorage.getItem("completedTasks")).map((task) => (
+          <div key={task.id}>
+            {task.content}
+          </div>
+        ))}
+      </div>
+
       {/* Snack bar */}
       <Snackbar
         key={vertical + horizontal}

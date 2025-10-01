@@ -31,7 +31,7 @@ const Info = ({ close }) => {
               </li>
               <li>
                 <strong>Add the Task:</strong> Press the <strong>Enter</strong>
-                 key on your keyboard, or click the <strong>Add</strong> button
+                key on your keyboard, or click the <strong>Add</strong> button
                 (a plus sign icon) next to the input field. If the input field
                 is empty and you attempt to add a task, an error message will be
                 displayed.
@@ -53,7 +53,7 @@ const Info = ({ close }) => {
             <h4>Editing a Task</h4>
             <ol>
               <li>
-                <strong>Open Edit Mode:</strong> Click the <strong>Edit</strong>{" "}
+                <strong>Open Edit Mode:</strong> Click the <strong>Edit</strong>
                 button (a pencil icon) next to the task you want to edit.
               </li>
               <li>
@@ -65,7 +65,7 @@ const Info = ({ close }) => {
             <h4>Deleting a Task</h4>
             <ol>
               <li>
-                <strong>Delete the Task:</strong> Click the{" "}
+                <strong>Delete the Task:</strong> Click the
                 <strong>Delete</strong> button (a trash can icon) next to the
                 task you want to remove.
               </li>
